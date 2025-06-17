@@ -8,6 +8,8 @@ function App() {
  const[name,setName] = useState("")
   const[email, setEmail] = useState("")
   const[number,setNumber] = useState("")
+
+  // Code for adding the formdata into local storage in console//////////
   const [data, setData] = useState<ContactTypes[]>(() => {
   const storedData = localStorage.getItem("contacts");
   return storedData ? JSON.parse(storedData) : [];
@@ -16,6 +18,9 @@ function App() {
 useEffect(() => {
   localStorage.setItem("contacts", JSON.stringify(data));
 }, [data]);
+
+/////////////////////////////////////////////////////////////////
+// const[data,setData] = useState<ContactTypes[]>([])
 
   // console.log("data is", data)
   return (

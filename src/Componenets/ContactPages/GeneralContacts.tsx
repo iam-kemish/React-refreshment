@@ -6,13 +6,14 @@ const GeneralContacts: React.FC = () => {
     if(!context) return null;
     const{data,setData} = context;
   const generalContacts = data.filter((u) => !u.isFavorite);
-console.log("What", data);
-  const MarkAsFavourite = (id: number) => {
+  const MarkAsFavorite = (id: number) => {
     const updated = data.map((contact) =>
-      contact.id === id ? { ...contact, isFavourite: true } : contact
-    );
-    setData(updated); // Update context state
-  };
+      contact.id === id ? { ...contact, isFavorite: true } : contact
+  );
+  setData(updated); // Update context state
+  
+};
+console.log("What", data);
 
   return (
     <div className="mt-4">
@@ -32,9 +33,9 @@ console.log("What", data);
               <div>
                 <button
                   className="btn btn-outline-warning"
-                  onClick={() => MarkAsFavourite(contact.id)}
+                  onClick={() => MarkAsFavorite(contact.id)}
                 >
-                  ⭐ Add to Favourites
+                  ⭐ Add to Favorites
                 </button>
               </div>
             </div>

@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ContactTypes } from "../Types";
+import { Contexted } from "../../Context/Contexted";
 
 interface Props {
   contact: ContactTypes;
 }
 
 const Contact: React.FC<Props> = ({ contact }) => {
-    const nameClass = `card-title mb-1 ${contact.isFavourite?"text-secondary" : "text-primary"}`
+   const context = useContext(Contexted)
+      if(!context) return null;
+      const {data,setData} = context
+   const DeleteContact =(id:number)=>{
+    const updated = data.filter((contact)=>{
+        return contact.id !== id
+    })
+   setData(updated);
+   }
+
+    const nameClass = `card-title mb-1 ${contact.isFavorite?"text-secondary" : "text-primary"}`
+   
   return (
  <>
 
@@ -23,6 +35,7 @@ const Contact: React.FC<Props> = ({ contact }) => {
           </button>
          <button
             className="btn btn-sm btn-outline-danger"
+            onClick={() => DeleteContact(contact.id)}
           >
             Delete
           </button>

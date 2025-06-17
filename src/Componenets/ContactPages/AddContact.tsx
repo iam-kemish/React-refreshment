@@ -2,62 +2,86 @@ import React, { useContext } from "react";
 import { Contexted } from "../../Context/Contexted";
 
 const AddContact = () => {
-  const context = useContext(Contexted)
-  if(!context) return null;
-  const {name, setName, email,setEmail,number,setNumber, data,setData} = context
-  const handleSubmit =(e: React.FormEvent<HTMLFormElement>)=>{
+  const context = useContext(Contexted);
+  if (!context) return null;
+
+  const { name, setName, email, setEmail, number, setNumber, data, setData } = context;
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const newContact = {
-      id : Date.now(),
+      id: Date.now(),
       name,
       email,
       number,
-      isFavorite : false
-    }
-    setData([
-      ...data, newContact])
+      isFavorite: false,
+    };
 
-      setName("")
-      setEmail("")
-      setNumber("")
-    }
-    // console.log(data);
+    setData([...data, newContact]);
+    setName("");
+    setEmail("");
+    setNumber("");
+  };
+
   return (
-  <form onSubmit={handleSubmit}>
-      <div className="container-fluid my-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-10 col-lg-10">
-          <div className="card shadow-lg border-0 rounded-4 w-100">
-            <div className="card-header bg-primary text-white rounded-top-4">
-              <h4 className="mb-0 text-center">➕ Add New Contact</h4>
-            </div>
-            <div className="card-body px-4">
-         
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Full Name</label>
-                  <input type="text" className="form-control" id="name" placeholder="Enter full name" onChange={e=> setName(e.target.value)} value={name}/>
+    <form onSubmit={handleSubmit}>
+      <div className="container my-4">
+        <div className="row justify-content-center">
+          <div className="col-md-10 col-lg-8">
+            <div className="card border-0 shadow-lg rounded-4">
+              <div className="card-header bg-gradient bg-primary text-white rounded-top-4 py-3">
+                <h4 className="mb-0 text-center">➕ Add New Contact</h4>
+              </div>
+              <div className="card-body p-4">
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="name">👤 Full Name</label>
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email Address</label>
-                  <input type="email" className="form-control" id="email" placeholder="Enter email" onChange={e=> setEmail(e.target.value)} value={email} />
+                <div className="form-floating mb-3">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="email">📧 Email Address</label>
                 </div>
 
-                <div className="mb-4">
-                  <label htmlFor="phone" className="form-label">Phone Number</label>
-                  <input type="tel" className="form-control" id="phone" placeholder="Enter phone number" onChange={e=> setNumber(e.target.value)} value={number} />
+                <div className="form-floating mb-4">
+                  <input
+                    type="tel"
+                    className="form-control"
+                    id="phone"
+                    placeholder="9800000000"
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
+                    required
+                  />
+                  <label htmlFor="phone">📞 Phone Number</label>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-100 py-2">
-                  Add Contact
+                <button type="submit" className="btn btn-success w-100 py-2">
+                  ✅ Add Contact
                 </button>
-              
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
   );
 };
 

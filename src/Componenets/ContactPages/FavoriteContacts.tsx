@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Contact from "./Contact";
-import { contactList } from "../Array";
 import { Contexted } from "../../Context/Contexted";
 
 
