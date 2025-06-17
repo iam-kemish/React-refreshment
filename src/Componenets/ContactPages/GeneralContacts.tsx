@@ -4,11 +4,14 @@ import { Contexted } from "../../Context/Contexted";
 const GeneralContacts: React.FC = () => {
    const context = useContext(Contexted)
     if(!context) return null;
-    const{data} = context;
-  const generalContacts = data.filter((u) => !u.isFavourite);
-
-  const MarkAsFavourite = (id: number) =>{
-     
+    const{data,setData} = context;
+  const generalContacts = data.filter((u) => !u.isFavorite);
+console.log("What", data);
+  const MarkAsFavourite = (id: number) => {
+    const updated = data.map((contact) =>
+      contact.id === id ? { ...contact, isFavourite: true } : contact
+    );
+    setData(updated); // Update context state
   };
 
   return (

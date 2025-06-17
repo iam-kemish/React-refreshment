@@ -12,7 +12,7 @@ const AddContact = () => {
       name,
       email,
       number,
-      isFavourite : false
+      isFavorite : false
     }
     setData([
       ...data, newContact])
@@ -21,7 +21,7 @@ const AddContact = () => {
       setEmail("")
       setNumber("")
     }
-    console.log(data);
+    // console.log(data);
   return (
   <form onSubmit={handleSubmit}>
       <div className="container-fluid my-5">

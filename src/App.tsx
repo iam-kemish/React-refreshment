@@ -17,7 +17,7 @@ useEffect(() => {
   localStorage.setItem("contacts", JSON.stringify(data));
 }, [data]);
 
-  console.log("data is", data)
+  // console.log("data is", data)
   return (
     <>
     <Contexted.Provider value={{name, setName, email,setEmail,number,setNumber, data,setData}}>

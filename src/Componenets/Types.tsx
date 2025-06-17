@@ -3,5 +3,16 @@ export type ContactTypes= {
   name: string;
   email: string;
   number: string;
-  isFavourite: boolean;
+  isFavorite: boolean;
 }
+
+export type ContactContextType = {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  number: string;
+  setNumber: React.Dispatch<React.SetStateAction<string>>;
+  data: ContactTypes[];
+  setData: React.Dispatch<React.SetStateAction<ContactTypes[]>>;
+};

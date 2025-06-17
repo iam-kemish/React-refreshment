@@ -8,7 +8,7 @@ const FavoriteContacts: React.FC = () => {
   const context = useContext(Contexted)
     if(!context) return null;
     const {data} = context
-  const favorites = data.filter(u=>u.isFavourite == true)
+  const favorites = data.filter(u=>u.isFavorite == true)
   return (
     <div className="mt-4">
       <h3>⭐ Favorite Contacts</h3>
