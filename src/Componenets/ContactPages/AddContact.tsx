@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Contexted } from "../../Context/Contexted";
 import { Link } from "react-router-dom";
 
@@ -6,11 +6,40 @@ const AddContact = () => {
   const context = useContext(Contexted);
   if (!context) return null;
 
-  const { name, setName, email, setEmail, number, setNumber, data, setData } = context;
+  const { name, setName, email, setEmail, number, setNumber, data, setData, setEditingContact, editingContact } = context;
+  useEffect(()=>{
+  if(editingContact){
+    setName(editingContact.name)
+    setEmail(editingContact.email)
+    setNumber(editingContact.number)
+  }else {
+     setName("");
+      setEmail("");
+      setNumber("");
+  }
+  },[editingContact])
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
+  if (editingContact) {
+    //  We're editing an existing contact
+    const updatedContact = {
+      ...editingContact, // Keep id and isFavorite
+      name,
+      email,
+      number,
+    };
 
+    //  Replace only the matching contact in the list
+    const updatedList = data.map((c) =>
+      c.id === editingContact.id ? updatedContact : c
+    );
+
+    setData(updatedList);       // Update context state
+    setEditingContact(null);    // Clear editing mode
+  } else {
+    //  We're adding a new contact
     const newContact = {
       id: Date.now(),
       name,
@@ -19,11 +48,15 @@ const AddContact = () => {
       isFavorite: false,
     };
 
-    setData([...data, newContact]);
-    setName("");
-    setEmail("");
-    setNumber("");
-  };
+    setData([...data, newContact]);  // Add to contact list
+  }
+
+  // 🧹 Clear form fields in both cases
+  setName("");
+  setEmail("");
+  setNumber("");
+};
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -32,7 +65,7 @@ const AddContact = () => {
           <div className="col-md-10 col-lg-8">
             <div className="card border-0 shadow-lg rounded-4">
               <div className="card-header bg-gradient bg-primary text-white rounded-top-4 py-3">
-                <h4 className="mb-0 text-center">➕ Add New Contact</h4>
+                <h4 className="mb-0 text-center">{editingContact ? "✏️ Edit Contact" : "➕ Add New Contact"}</h4>
               </div>
               <div className="card-body p-4">
                 <div className="form-floating mb-3">

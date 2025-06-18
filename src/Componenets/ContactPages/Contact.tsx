@@ -1,15 +1,26 @@
-import React, { useContext } from "react";
+import React, { MouseEventHandler, useContext } from "react";
 import { ContactTypes } from "../Types";
 import { Contexted } from "../../Context/Contexted";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   contact: ContactTypes;
 }
 
 const Contact: React.FC<Props> = ({ contact }) => {
+
    const context = useContext(Contexted)
       if(!context) return null;
-      const {data,setData} = context
+      const {data,setData, setEditingContact} = context
+    
+      const JoinForm = useNavigate();
+     const JoinFormPage = ()=>{
+      
+       setEditingContact(contact)
+       console.log(contact, "C")
+       JoinForm("/form")
+     }
+
    const DeleteContact =(id:number)=>{
     const updated = data.filter((contact)=>{
         return contact.id !== id
@@ -30,7 +41,9 @@ const Contact: React.FC<Props> = ({ contact }) => {
           <p className={nameClass}>📞 {contact.number}</p>
         </div>
       <button
-            className="btn btn-sm btn-outline-primary">
+            className="btn btn-sm btn-outline-primary" 
+            onClick={() =>JoinFormPage()}
+            >
             Edit
           </button>
          <button
@@ -41,8 +54,6 @@ const Contact: React.FC<Props> = ({ contact }) => {
           </button>
       </div>
     </div>
-    
- 
  </>
   );
 };
