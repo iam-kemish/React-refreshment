@@ -4,6 +4,8 @@ export type ContactTypes= {
   email: string;
   number: string;
   isFavorite: boolean;
+  
+
 }
 
 export type ContactContextType = {
@@ -15,4 +17,6 @@ export type ContactContextType = {
   setNumber: React.Dispatch<React.SetStateAction<string>>;
   data: ContactTypes[];
   setData: React.Dispatch<React.SetStateAction<ContactTypes[]>>;
+  editingContact: ContactTypes | null;
+  setEditingContact: React.Dispatch<React.SetStateAction<ContactTypes | null>>;
 };

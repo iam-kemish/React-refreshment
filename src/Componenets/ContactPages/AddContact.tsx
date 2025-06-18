@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Contexted } from "../../Context/Contexted";
+import { Link } from "react-router-dom";
 
 const AddContact = () => {
   const context = useContext(Contexted);
@@ -74,8 +75,11 @@ const AddContact = () => {
                 </div>
 
                 <button type="submit" className="btn btn-success w-100 py-2">
-                  ✅ Add Contact
+                  ✅ Submit
                 </button>
+                <Link className="btn btn-primary w-100 py-2 mt-2" to="/">
+                  Back 
+                </Link>
               </div>
             </div>
           </div>

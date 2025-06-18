@@ -1,13 +1,12 @@
 // ContactIndex.tsx
 
 import AddContact from "./AddContact";
-import AddRandomContact from "./AddRandomContact";
 import FavoriteContacts from "./FavoriteContacts";
 import GeneralContacts from "./GeneralContacts";
-import RemoveAllContact from "./RemoveAllContact";
 import Footer from "../Layout/Footer";
 import { useContext } from "react";
 import { Contexted } from "../../Context/Contexted";
+import { Link } from "react-router-dom";
 
 const ContactIndex = () => {
   const context = useContext(Contexted);
@@ -22,18 +21,18 @@ const ContactIndex = () => {
 
       {/* Top Actions */}
       <section className="row justify-content-center mb-5">
-        <div className="col-md-4 mb-3">
-          <AddRandomContact />
-        </div>
-        <div className="col-md-4 mb-3">
-          <RemoveAllContact />
-        </div>
-        <div className="col-md-4 mb-3">
-          <AddContact />
-        </div>
+      
       </section>
 
       {/* 🔴 Remove All Contacts Button (UI only) */}
+   {/* Add Contact Button */}
+      <div className="text-center mb-4">
+        <Link className="btn btn-primary px-4 py-2" to="/form">
+          ➕ Add Contact
+        </Link>
+      </div>
+
+      {/* Remove All Contacts Button */}
       <div className="text-center mb-4">
         <button className="btn btn-danger px-4 py-2" onClick={handleRemove}>
           🗑️ Remove All Contacts
